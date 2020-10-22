@@ -1,0 +1,17 @@
+export const home = (req, res) => res.render("home", { pageTitle: "Home" });
+export const search = (req, res) => {
+  const {
+    query: { term: searchingBy },
+  } = req;
+  //const searchingBy = req.query.term;위는 이것과 같다.
+  //또한 첫번째 방법은 term을 searchingBy로 변경한다.
+  res.render("search", { pageTitle: "Search", searchingBy });
+};
+export const upload = (req, res) =>
+  res.render("upload", { pageTitle: "Upload" });
+export const videoDetail = (req, res) =>
+  res.render("videoDetail", { pageTitle: "Video Detail" });
+export const editVideo = (req, res) =>
+  res.render("editVideo", { pageTitle: "Edit Video" });
+export const deleteVideo = (req, res) =>
+  res.render("deleteVideo", { pageTitle: "Delete Video" });

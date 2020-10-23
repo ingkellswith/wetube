@@ -2,9 +2,9 @@ extends layouts/main
 
 block content
     .form-container
-        form(action="routes.login", method="post")
-            input(type="email", name="email", placeholder="Email")
-            input(type="password", name="password", placeholder="Password")
+        form(action=routes.login, method="post")
+            input(type="email", name="email", placeholder="Email",requried=true)
+            input(type="password", name="password", placeholder="Password",requried=true)
             input(type="submit",value="Log In")
         include partials/socialLogin
     //-routes.login은 /login과 같다.

@@ -6,6 +6,7 @@ export const getJoin = (req, res) => {
 
 export const postJoin = (req, res) => {
   //req.body에 오브젝트 형태로 아래 4개 값이 들어 있음
+  //bodyparser때문에 가능한 일
   const {
     body: { name, email, password, password2 },
   } = req;
@@ -23,9 +24,11 @@ export const getLogin = (req, res) =>
   res.render("login", { pageTitle: "Login" });
 
 export const postLogin = (req, res) => res.redirect(routes.home);
+
 export const logout = (req, res) => {
   res.redirect(routes.home);
 };
+
 export const userDetail = (req, res) =>
   res.render("userDetail", { pageTitle: "UserDetail" });
 export const editProfile = (req, res) =>

@@ -5,7 +5,6 @@ import {
   getUpload,
   postUpload,
   videoDetail,
-  videos,
 } from "../controllers/videoController";
 import routes from "../routes";
 

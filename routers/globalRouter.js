@@ -12,7 +12,7 @@ import routes from "../routes";
 const globalRouter = express.Router();
 
 globalRouter.get(routes.join, getJoin);
-globalRouter.post(routes.join, postJoin);
+globalRouter.post(routes.join, postJoin); //post방식으로 전달되면 실행되는 문장인듯
 
 globalRouter.get(routes.home, home);
 globalRouter.get(routes.search, search);

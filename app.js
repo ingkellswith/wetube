@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
     "script-src 'self' https://archive.org"
   );
   return next();
-});
+}); //video볼 때 helmet보안 걸려서 헤더 써줘야함.
 
 app.use("/", globalRouter); //'/'는 routes.home과 같음
 app.use(routes.users, userRouter);

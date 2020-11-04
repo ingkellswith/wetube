@@ -153,7 +153,7 @@ export const postChangePassword = async (req, res) => {
   } = req;
   try {
     if (newPassword !== newPassword1) {
-      res.status(400);
+      //res.status(400);
       res.redirect(`/users${routes.changePassword}`);
       console.log("슬라임");
       return;
@@ -163,7 +163,7 @@ export const postChangePassword = async (req, res) => {
     console.log("와일드보어");
     res.redirect(routes.me);
   } catch (error) {
-    res.status(400);
+    //res.status(400);
     console.log("스텀프");
     res.redirect(`/users${routes.changePassword}`);
   }

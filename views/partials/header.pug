@@ -9,7 +9,7 @@ header.header
                 input(type="text", placeholder="Search by term...", name="term")
         .header__column
             ul
-                if !user.isAuthenticated
+                if !loggedUser
                     li
                         a(href=routes.join) Join
                     li
@@ -18,7 +18,7 @@ header.header
                     li
                         a(href=`/videos${routes.upload}`) Upload
                     li
-                        a(href=routes.userDetail(user.id)) Profile
+                        a(href=routes.me) Profile
                         //-pug파일에는 매개변수가 존재하고 router.js파일에는 매개변수가 없다.
                     li
                         a(href=routes.logout) Log Out

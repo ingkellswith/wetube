@@ -1,15 +1,21 @@
 import express from "express";
 import {
-  changePassword,
-  editProfile,
+  getChangePassword,
+  getEditProfile,
+  postChangePassword,
+  postEditProfile,
   userDetail,
 } from "../controllers/userController";
+import { onlyPrivate, uploadAvatar } from "../middlewares";
 import routes from "../routes";
 
 const userRouter = express.Router();
 
-userRouter.get(routes.editProfile, editProfile);
-userRouter.get(routes.changePassword, changePassword);
+userRouter.get(routes.editProfile, onlyPrivate, getEditProfile);
+userRouter.post(routes.editProfile, onlyPrivate, uploadAvatar, postEditProfile);
+
+userRouter.get(routes.changePassword, onlyPrivate, getChangePassword);
+userRouter.post(routes.changePassword, onlyPrivate, postChangePassword);
 userRouter.get(routes.userDetail(), userDetail);
 //editProfile보다 userDetail먼저 오면 id로 인식하기 때문에 순서가 중요
 //userDetail()에서 :id를 express는 이해할 수 있지만 html은 이해할 수 없다.

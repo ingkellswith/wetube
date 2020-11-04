@@ -44,8 +44,11 @@ export const postUpload = async (req, res) => {
     fileUrl: path,
     title,
     description,
+    creator: req.user.id,
   });
-  console.log(newVideo);
+  req.user.videos.push(newVideo._id);
+  req.user.save();
+  //console.log(newVideo);
   res.redirect(routes.videoDetail(newVideo._id));
   //id->every object created to mongoDB will be given an automatic ID
   //newVideo._id도 되고 newVideo.id도 되는듯? console.log상에는 _id로 나옴
@@ -63,7 +66,8 @@ export const videoDetail = async (req, res) => {
     params: { id },
   } = req;
   try {
-    const video = await Video.findById(id);
+    const video = await Video.findById(id).populate("creator");
+    //console.log(video, "비디오");
     res.render("videoDetail", { pageTitle: video.title, video });
   } catch (error) {
     res.redirect(routes.home);
@@ -75,7 +79,11 @@ export const getEditVideo = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
-    res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+    if (video.creator !== req.user.id) {
+      throw Error();
+    } else {
+      res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+    }
   } catch (error) {
     res.redirect(routes.home);
   }
@@ -101,8 +109,14 @@ export const deleteVideo = async (req, res) => {
     params: { id },
   } = req;
   try {
-    await Video.findOneAndRemove({ _id: id });
+    const video = await Video.findById(id);
+    if (video.creator !== req.user.id) {
+      throw Error();
+    } else {
+      await Video.findOneAndRemove({ _id: id });
+    }
   } catch (error) {
-    res.redirect(routes.home);
+    console.log(error);
   }
+  res.redirect(routes.home);
 };

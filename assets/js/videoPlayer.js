@@ -81,12 +81,20 @@ function getCurrentTime() {
 }
 
 function setTotalTime() {
-  console.log(videoPlayer.duration);
+  //console.log(videoPlayer.duration);
   const totalTimeString = formatDate(videoPlayer.duration);
   totalTime.innerHTML = totalTimeString;
   setInterval(getCurrentTime, 1000);
   //videoPlayer.duration같은 것은 media element mdn에 나와있음
 }
+
+const registerView = () => {
+  const videoId = window.location.href.split("/videos/")[1];
+  fetch(`/api/${videoId}/view`, {
+    method: "GET", //post면 작동을 안하더라
+  });
+};
+
 function handleEnded() {
   videoPlayer.currentTime = 0;
   playBtn.innerHTML = '<i class="fas fa-play"></i>';
@@ -120,4 +128,5 @@ function init() {
 
 if (videoContainer) {
   init();
+  registerView();
 }

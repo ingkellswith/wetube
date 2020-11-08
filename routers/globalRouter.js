@@ -44,5 +44,6 @@ globalRouter.get(
   passport.authenticate("facebook", { failureRedirect: "/login" }),
   postFacebookLogin
 );
+globalRouter.get("/favicon.ico", (req, res) => res.status(204));
 
 export default globalRouter;

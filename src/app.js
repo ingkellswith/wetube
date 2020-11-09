@@ -13,6 +13,7 @@ import mongoose from "mongoose";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
+import flash from "express-flash";
 import routes from "./routes";
 import { localsMiddleware } from "./middlewares";
 import "./passport";
@@ -44,6 +45,7 @@ app.use(
     store: new CookieStore({ mongooseConnection: mongoose.connection }),
   })
 );
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());

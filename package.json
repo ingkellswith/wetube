@@ -47,12 +47,11 @@
     "dev:assets": "cd src && cross-env WEBPACK_ENV=development webpack -w",
     "build:assets": "cd src && cross-env WEBPACK_ENV=production webpack",
     "build:server": "babel src --out-dir build --ignore 'src/assets','src/static','src/webpack.config.js'",
-    "copyAll": "xcopy \"src/static\" \"build/static\" /s /e && xcopy \"src/views\" \"build/views\" /s /e" ,
+    "copyAll": "shx xcopy \"src/static\" \"build/static\" /s /e && shx xcopy \"src/views\" \"build/views\" /s /e",
     "tunnel": "lt --port 4000",
     "build": "npm run build:server && npm run build:assets && npm run copyAll",
-    
     "start": "PRODUCTION=true node build/init.js",
-    "prestart":"npm run build"
+    "prestart": "npm run build"
   },
   "devDependencies": {
     "eslint": "^7.12.1",
@@ -61,6 +60,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.1.4",
     "nodemon": "^2.0.6",
-    "prettier": "2.1.2"
+    "prettier": "2.1.2",
+    "shx": "^0.3.3"
   }
 }

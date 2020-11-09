@@ -4,6 +4,7 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import passport from "passport";
+import path from "path";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import mongoose from "mongoose";
@@ -25,9 +26,12 @@ const CookieStore = MongoStore(session);
 
 app.use(helmet());
 app.set("view engine", "pug");
-app.use("/uploads", express.static("uploads"));
+app.set("views", path.join(__dirname, "views"));
+//app.use("/uploads", express.static("uploads"));
 //directory에서 파일을 보내는 역할을 하는 express.static()
-app.use("/static", express.static("static"));
+app.use("/static", express.static(path.join(__dirname, "static")));
+//위는 원래 app.use("/static", express.static("static"));였음 근데 package.json있는 곳이
+//기본 경로이기 때문에 경로를 src/static으로 경로를 바꿔준것
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

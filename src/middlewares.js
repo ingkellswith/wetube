@@ -18,14 +18,14 @@ const multerVideo = multer({
   storage: multerS3({
     s3,
     acl: "public-read",
-    bucket: "wetube/video",
+    bucket: "wetube-ingkellswith/video",
   }),
 });
 const multerAvatar = multer({
   storage: multerS3({
     s3,
     acl: "public-read",
-    bucket: "wetube/avatar",
+    bucket: "wetube-ingkellswith/avatar",
   }),
 });
 export const localsMiddleware = (req, res, next) => {

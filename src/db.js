@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 //mongodb와 nodejs를 연결해주는 역할을 하는 mongoose
 
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect(process.env.MONGO_URL_PROD, {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true,

@@ -1,9 +1,11 @@
+import "@babel/polyfill";
 import "./db"; //개별 export는 중괄호 사용
 import app from "./app";
 import dotenv from "dotenv";
 import "./models/Video";
 import "./models/Comment";
 import "./models/User";
+
 //mongoose가 model들을 인지해야하므로 import한 것
 dotenv.config();
 

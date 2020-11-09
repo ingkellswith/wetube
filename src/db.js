@@ -4,6 +4,11 @@ import dotenv from "dotenv";
 dotenv.config();
 //mongodb와 nodejs를 연결해주는 역할을 하는 mongoose
 
+//mongoose.connect(process.env.PRODUCTION ? process.env.MONGO_URL_PROD : process.env.MONGO_URL, {
+//  useNewUrlParser: true,
+//  useFindAndModify: false,
+// useUnifiedTopology: true,
+//});이거 사용할라면 package.json에 start에 PRODUCTION=true 넣어야함
 mongoose.connect(process.env.MONGO_URL_PROD, {
   useNewUrlParser: true,
   useFindAndModify: false,

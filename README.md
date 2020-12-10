@@ -4,7 +4,8 @@ Cloning Youtube with VanillaJS and NodeJS
 
 # Notification
 
-페이스북 로그인과 video record기능은 현재 미구현 상태입니다.
+- 페이스북 로그인과 video record기능은 현재 미구현 상태입니다.
+- heroku로 볼 때는 응답 시간이 오래 걸릴 수 있습니다. 오류가 아니니 기다려주세요.
 
 # Description
 

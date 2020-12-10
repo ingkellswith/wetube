@@ -47,8 +47,8 @@ export const postUpload = async (req, res) => {
     description,
     creator: req.user.id,
   });
-  req.user.videos.push(newVideo._id);
-  req.user.save();
+  req.user.videos.push(newVideo._id); //원래 없던 부분
+  req.user.save(); //원래 없던 부분
   //console.log(newVideo);
   res.redirect(routes.videoDetail(newVideo._id));
   //id->every object created to mongoDB will be given an automatic ID

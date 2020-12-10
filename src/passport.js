@@ -9,7 +9,7 @@ import {
 import routes from "./routes";
 
 passport.use(User.createStrategy());
-
+//strategy는 로그인 시키는 방법인데 이건 local으로 이메일,패스워드 입력하면 로그인해주는 방식
 passport.use(
   new GithubStrategy(
     {

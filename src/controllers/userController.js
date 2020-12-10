@@ -20,8 +20,12 @@ export const postJoin = async (req, res, next) => {
         name,
         email,
       });
-      //console.log(user);await User로 database만드는 것임
+      //console.log(user);
+      //User는 User Object를 만들기만 하고 User.create는 데이터베이스에 저장까지 한다.
       await User.register(user, password);
+      //User Database model인 Object를 받아서 create처럼 등록한다.
+      //다만 user에 name,email만 들어있으므로 최종적으로 _id,name,email,암호화된 password가 등록된다.
+      //passport-local-mongoose때문에 register이 가능
       next();
     } catch (error) {
       console.log(error);

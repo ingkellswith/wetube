@@ -5,8 +5,9 @@ const ExtractCSS = require("extract-text-webpack-plugin");
 const MODE = process.env.WEBPACK_ENV;
 //package.json에 있는 것과 같은 WEBPACK_ENV
 const ENTRY_FILE = path.resolve(__dirname, "assets", "js", "main.js");
+//file은 resolve, directory는 join을 쓰는 듯?
 const OUTPUT_DIR = path.join(__dirname, "static");
-//__dirname은 현재 프로젝트의 디렉토리 wetube를 의미하는 듯
+//__dirname은 현재 파일이 속한 폴더를 의미함
 
 const config = {
   devtool: "cheap-module-source-map",

@@ -1,21 +1,13 @@
 # WeTube
 
+Cloning Youtube with VanillaJS and NodeJS
 
-Cloning Youtube with Vanilla and NodeJS
+# Notification
 
-## Pages:
+페이스북 로그인과 video record기능은 현재 미구현 상태입니다.
 
-- [ ] Home
-- [ ] Join
-- [ ] Login
-- [x] Search
-- [ ] User Detail
-- [ ] Edit Profile
-- [ ] Change Password
-- [ ] Upload
-- [ ] Video Detail
-- [ ] Edit Video
+# Description
 
-//package.json에서 dev:assets에서 -w로 watch mode로 설정했기 때문에 vsc에서 저장만 해도 로컬 호스트
-에서 새로고침만 해도 변경내용이 반영됨
-//"prebuild": "rd /s \"build\"", package.json에서 heroku로 deploy할 때 오류나서 잠깐 뺐음
+유튜브처럼 로그인 후 비디오를 업로드하고 댓글을 업데이트할 수 있게 만든 앱입니다.
+
+

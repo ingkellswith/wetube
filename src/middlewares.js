@@ -33,8 +33,8 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.routes = routes;
   res.locals.loggedUser = req.user || null;
   //비어있으면 빈 객체 전달
-  //console.log(req.user, "자쿰");
-  //여기에서 req.user는 Mongo에 저장된 User database를 말함
+  //console.log(req.user,"reqUser");
+  //여기에서 req.user는 Mongo에 저장된 User database를 말함, 로그인하면 passport가 자동으로 전달해주는것
   next();
 };
 

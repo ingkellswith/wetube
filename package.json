@@ -53,7 +53,8 @@
     "copyAll": "shx cp -r src/static build/static && shx cp -r src/views build/views",
     "tunnel": "lt --port 4000",
     "build": "npm run build:server && npm run build:assets && npm run copyAll",
-    "start": "node build/init.js",
+    "prebuild": "rmdir /s /q build",
+    "start": "PRODUCTION=true node build/init.js",
     "prestart": "npm run build"
   },
   "devDependencies": {

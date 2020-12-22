@@ -45,10 +45,10 @@ export const postUpload = async (req, res) => {
     fileUrl: location,
     title,
     description,
-    creator: req.user.id,
+    creator: req.user.id, //1.creator로 현재 로그인한 유저의 id를 넣음
   });
-  req.user.videos.push(newVideo._id); //원래 없던 부분
-  req.user.save(); //원래 없던 부분
+  req.user.videos.push(newVideo._id); //2.이 비디오를 현재 로그인한 유저의 데이터베이스 모델에 추가
+  req.user.save(); //3.세이브
   //console.log(newVideo);
   res.redirect(routes.videoDetail(newVideo._id));
   //id->every object created to mongoDB will be given an automatic ID
@@ -70,8 +70,8 @@ export const videoDetail = async (req, res) => {
   try {
     const video = await Video.findById(id)
       .populate("creator")
-      .populate("comments");
-    console.log(video, "비디오디테일");
+      .populate("comments"); //populate하면 기본 데이터와 객체화된 creator와 comments를 함께 볼 수 있음
+    //console.log(video, "비디오디테일");
     res.render("videoDetail", { pageTitle: video.title, video });
   } catch (error) {
     res.redirect(routes.home);

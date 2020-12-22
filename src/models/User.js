@@ -14,6 +14,7 @@ const UserSchema = new mongoose.Schema({
     },
   ],
   videos: [
+    //간단함 사용할 때 populate만 해주면 사용할 수 있음
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Video",

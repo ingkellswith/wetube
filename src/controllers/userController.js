@@ -60,9 +60,10 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
     if (user) {
       user.githubId = id;
       user.name = name;
+      user.avatarUrl = avatarUrl;
       user.save();
       //console.log(user, "달팽이");
-      return cb(null, user);
+      return cb(null, user); //여기서 전달한 user가 로그인되면(authenticate) req.user가 됨(비번 없음)
     }
     const newUser = await User.create({
       email,
@@ -120,9 +121,10 @@ export const logout = (req, res) => {
   //passport때문에 req.logout()이 동작함
   res.redirect(routes.home);
 };
-export const getMe = (req, res) => {
+export const getMe = async (req, res) => {
   //console.log(req.user, "혼테일");
-  res.render("userDetail", { pageTitle: "User Detail", user: req.user });
+  const user = await User.findById(req.user._id).populate("videos");
+  res.render("userDetail", { pageTitle: "User Detail", user });
 }; //req.user는 현재 로그인 되어 있는 사용자
 
 export const userDetail = async (req, res) => {
@@ -131,7 +133,7 @@ export const userDetail = async (req, res) => {
   } = req;
   try {
     const user = await User.findById(id).populate("videos");
-    console.log(user, "유저");
+    //console.log(user, "유저");
     //console.log(user, "발록");
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
@@ -164,21 +166,21 @@ export const getChangePassword = (req, res) =>
   res.render("changePassword", { pageTitle: "Change Password" });
 
 export const postChangePassword = async (req, res) => {
-  console.log(req.body.oldPassword);
   const {
     body: { oldPassword, newPassword, newPassword1 },
   } = req;
+  //console.log(req.body.oldPassword);
   try {
     if (newPassword !== newPassword1) {
       req.flash("error", "Passwords don't match");
       res.status(400);
       res.redirect(`/users${routes.changePassword}`);
-      console.log("슬라임");
+      //console.log("슬라임");
       return;
     }
     await req.user.changePassword(oldPassword, newPassword);
     //passport-local-mongoose때문에 사용가능
-    console.log("와일드보어");
+    //console.log("와일드보어");
     res.redirect(routes.me);
   } catch (error) {
     req.flash("error", "Can't change password");

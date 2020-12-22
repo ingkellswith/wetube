@@ -28,13 +28,13 @@ globalRouter.post(routes.login, onlyPublic, postLogin);
 
 globalRouter.get(routes.logout, onlyPrivate, logout);
 
-globalRouter.get(routes.gitHub, githubLogin);
+globalRouter.get(routes.gitHub, githubLogin); //github-wetube계정이 있을 시 github로 그냥 로그인할 때
 
 globalRouter.get(
   routes.githubCallback,
   passport.authenticate("github", { failureRedirect: "/login" }),
   postGithubLogIn
-);
+); //github로 조인하는 과정
 
 globalRouter.get(routes.me, getMe);
 

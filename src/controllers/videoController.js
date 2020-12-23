@@ -2,6 +2,7 @@ import routes from "../routes"; //default export는 중괄호를 쓰지 않는�
 //db에서 videos를 import하던 것을 삭제함(fake db)
 import Video from "../models/Video";
 import Comment from "../models/Comment";
+import User from "../models/User";
 
 export const home = async (req, res) => {
   try {
@@ -67,12 +68,27 @@ export const videoDetail = async (req, res) => {
   const {
     params: { id },
   } = req;
+
   try {
     const video = await Video.findById(id)
       .populate("creator")
       .populate("comments"); //populate하면 기본 데이터와 객체화된 creator와 comments를 함께 볼 수 있음
     //console.log(video, "비디오디테일");
-    res.render("videoDetail", { pageTitle: video.title, video });
+
+    const writers = await Promise.all(
+      video.comments.map((element) => {
+        const writer = User.findById(element.creator);
+        //console.log(writer);
+        return writer;
+      })
+    );
+    //console.log(writers);
+
+    res.render("videoDetail", {
+      pageTitle: video.title,
+      video,
+      writers,
+    });
   } catch (error) {
     res.redirect(routes.home);
   }
@@ -147,12 +163,13 @@ export const postRegisterView = async (req, res) => {
 // Add Comment
 
 export const postAddComment = async (req, res) => {
-  console.log(req, "포스트애드커멘트");
+  //console.log(req, "포스트애드커멘트");
   const {
     params: { id },
     body: { comment },
     user,
   } = req;
+  //console.log(user);
   try {
     const video = await Video.findById(id);
     const newComment = await Comment.create({
